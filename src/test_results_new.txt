@@ -1,0 +1,51 @@
+﻿==================================================
+REMOTE API FULL TEST
+==================================================
+
+1. Health Check...
+   Status: 200
+   Response: {'status': 'ok', 'timestamp': '2025-12-24T18:48:06.853010Z'}
+
+2. Welcome Endpoint...
+   Status: 200
+
+3. Upload File...
+   Status: 200
+   Response: {'Signal': 'File uploaded successfully', 'FileId': '822393c7-fc87-4143-8004-935594ad4b43', 'FileName': '9ffy7v10bwwl_test.txt'}
+
+4. Process File (Chunking)...
+   Status: 200
+   Response: {'Signal': 'File processing successful', 'inserted_chunks': 26, 'processed_files': 7}
+
+5. Index to Vector DB (Qdrant)...
+   Status: 200
+   Response: {'signal': 'insert_into_vectordb_success', 'inserted_items_count': 26}
+
+   Waiting 3 seconds for indexing...
+
+6. Semantic Search...
+   Status: 200
+   Found 3 results
+   Result 1: (score: 0.7583074) Machine Learning (ML) is a subset of Artificial Intelligence (AI) that enables 
+    systems to learn...
+   Result 2: (score: 0.7583074) Machine Learning (ML) is a subset of Artificial Intelligence (AI) that enables 
+    systems to learn...
+
+7. RAG Answer (using OpenRouter LLM)...
+   This may take 30-60 seconds...
+   Status: 400
+
+==================================================
+TEST RESULTS SUMMARY
+==================================================
+   [OK] HEALTH: PASSED
+   [OK] WELCOME: PASSED
+   [OK] UPLOAD: PASSED
+   [OK] PROCESS: PASSED
+   [OK] INDEX: PASSED
+   [OK] SEARCH: PASSED
+   [X] ANSWER: FAILED
+
+==================================================
+Some tests failed. Check the output above.
+==================================================

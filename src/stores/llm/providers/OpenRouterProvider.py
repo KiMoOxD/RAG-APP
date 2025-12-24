@@ -113,8 +113,9 @@ class OpenRouterProvider(LLMInterface):
             )
             
             if response.status_code != 200:
-                self.logger.error(f"OpenRouter API error: {response.status_code} - {response.text}")
-                return None
+                error_msg = f"OpenRouter API error: {response.status_code} - {response.text}"
+                self.logger.error(error_msg)
+                raise Exception(error_msg)
             
             result = response.json()
             
@@ -124,14 +125,15 @@ class OpenRouterProvider(LLMInterface):
                 return generated_text.strip() if generated_text else None
             
             self.logger.error("No choices in OpenRouter response")
-            return None
+            raise Exception("OpenRouter returned no choices in response")
 
         except requests.exceptions.Timeout:
-            self.logger.error("OpenRouter API request timed out")
-            return None
+            error_msg = "OpenRouter API request timed out after 60 seconds"
+            self.logger.error(error_msg)
+            raise Exception(error_msg)
         except Exception as e:
             self.logger.error(f"Error in OpenRouter generate_text: {str(e)}")
-            return None
+            raise
 
     def embed_text(self, text: str, document_type: str = None):
         """

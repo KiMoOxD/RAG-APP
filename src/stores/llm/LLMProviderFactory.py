@@ -1,6 +1,5 @@
 from .LLMEnums import LLMEnums
 from .providers.GeminiProvider import GeminiProvider
-from .providers.CoHereProvider import CoHereProvider
 from .providers.OpenRouterProvider import OpenRouterProvider
 
 
@@ -22,6 +21,8 @@ class LLMProviderFactory:
             )
         
         if provider == LLMEnums.COHERE.value:
+            # Lazy import to avoid requiring cohere package when not used
+            from .providers.CoHereProvider import CoHereProvider
             return CoHereProvider(
                 api_key=self.config.COHERE_API_KEY,
                 default_input_max_characters=self.config.INPUT_DEFAULT_MAX_CHARACTERS,

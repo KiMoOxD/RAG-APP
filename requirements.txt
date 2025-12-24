@@ -10,3 +10,4 @@ PyMuPDF==1.25.1
 google-generativeai==0.8.5
 qdrant-client==1.10.1
 supabase==2.10.0
+requests>=2.31.0
